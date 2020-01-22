@@ -12,7 +12,7 @@ namespace CashMachineLibTests
         [Fact]
         public void InitialBalanceEqual4638()
         {
-            var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
+            var context = AlgorithmContext.GetInitialised<AlgorithmOne>(CultureInfo.GetCultureInfo("en-GB"));
 
             Assert.Equal(4638.00, context.Balance);
         }
@@ -20,7 +20,7 @@ namespace CashMachineLibTests
         [Fact]
         public void WithdrawReturnsMsgIfAmountGreaterThanBalance()
         {
-            var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
+            var context = AlgorithmContext.GetInitialised<AlgorithmOne>(CultureInfo.GetCultureInfo("en-GB"));
 
             var input = 5000;
             var output = context.Withdraw(input);
@@ -31,7 +31,7 @@ namespace CashMachineLibTests
         [Fact]
         public void WithdrawReturnsBalanceEqualToContextBalance()
         {
-            var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
+            var context = AlgorithmContext.GetInitialised<AlgorithmOne>(CultureInfo.GetCultureInfo("en-GB"));
 
             var input = 5000;
             var output = context.Withdraw(input);
@@ -49,7 +49,7 @@ namespace CashMachineLibTests
         [InlineData(0.29, "20p x 1, 5p x 1, 2p x 2")]
         public void ReturnsExpectedOutput(double input, string expectedOutput)
         {
-            var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
+            var context = AlgorithmContext.GetInitialised<AlgorithmOne>(CultureInfo.GetCultureInfo("en-GB"));
 
             var output = context.Withdraw(input);
 

@@ -10,7 +10,7 @@ namespace CashMachineLibTests
         [Fact]
         public void DefaultAlgorithmIsAlgorithmOne()
         {
-            var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
+            var context = AlgorithmContext.GetInitialised<AlgorithmOne>(CultureInfo.GetCultureInfo("en-GB"));
 
             Assert.Equal(typeof(AlgorithmOne), context.CurrentAlgorithmType);
         }
@@ -18,7 +18,7 @@ namespace CashMachineLibTests
         [Fact]
         public void AfterSwitchCurrentAlgorithmIsAlgorithmTwo()
         {
-            var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
+            var context = AlgorithmContext.GetInitialised<AlgorithmOne>(CultureInfo.GetCultureInfo("en-GB"));
             context.Switch<AlgorithmTwo>();
 
             Assert.Equal(typeof(AlgorithmTwo), context.CurrentAlgorithmType);

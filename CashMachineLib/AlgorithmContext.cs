@@ -5,17 +5,14 @@ using System.Text;
 
 namespace CashMachineLib
 {
-    public class AlgorithmContext : IAlgorithm
+    public class AlgorithmContext : IAlgorithmContext, IAlgorithm
     {
-        public AlgorithmContext(CultureInfo culture)
-        {
-            Culture = culture;
-            Switch<AlgorithmOne>();
-        }
+        private AlgorithmContext()
+        { /* */ }
 
         private IAlgorithm CurrentAlgorithm { get; set; }
 
-        public CultureInfo Culture { get; }
+        public CultureInfo Culture { get; private set; }
 
         public void Switch<T>() where T : IAlgorithm
         {
@@ -35,5 +32,15 @@ namespace CashMachineLib
         public Type CurrentAlgorithmType { get => CurrentAlgorithm.GetType(); }
 
         public double Balance => CurrentAlgorithm.Balance;
+
+        public static IAlgorithmContext GetInitialised<T>(CultureInfo culture) where T : IAlgorithm
+        {
+            var context = new AlgorithmContext
+            {
+                Culture = culture
+            };
+            context.Switch<T>();
+            return context;
+        }
     }
 }

@@ -12,9 +12,8 @@ namespace CashMachineLibTests
         [Fact]
         public void WithdrawReturnsMsgIfAmountGreaterThanBalance()
         {
-            var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
-            context.Switch<AlgorithmTwo>();
-
+            var context = AlgorithmContext.GetInitialised<AlgorithmTwo>(CultureInfo.GetCultureInfo("en-GB"));
+            
             var input = 5000;
             var output = context.Withdraw(input);
 
@@ -30,8 +29,7 @@ namespace CashMachineLibTests
         [InlineData(19, "Amount must be greater than £20.00")]
         public void ReturnsExpectedOutput(double input, string expectedOutput)
         {
-            var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
-            context.Switch<AlgorithmTwo>();
+            var context = AlgorithmContext.GetInitialised<AlgorithmTwo>(CultureInfo.GetCultureInfo("en-GB"));
 
             var output = context.Withdraw(input);
 
@@ -45,8 +43,7 @@ namespace CashMachineLibTests
         [InlineData(1001, 3638)]
         public void BalanceIsUpdatedCorrectly(double input, double expectedOutput)
         {
-            var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
-            context.Switch<AlgorithmTwo>();
+            var context = AlgorithmContext.GetInitialised<AlgorithmTwo>(CultureInfo.GetCultureInfo("en-GB"));
             _ = context.Withdraw(input);
 
             Assert.Equal(expectedOutput, context.Balance);
