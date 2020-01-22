@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace CashMachineLib
@@ -16,25 +17,28 @@ namespace CashMachineLib
         {
             if (SufficientFunds(amount))
             {
+
+                var orderedFloat = Float.OrderByDescending( o => o.Value).ToArray();
+
                 var sb = new StringBuilder();
 
-                for (var idx = 0; idx < CashItems.Length; idx++)
+                Array.ForEach(orderedFloat, item => 
                 {
-                    if (amount >= CashItems[idx])
+                    if (amount >= item.Value)
                     {
-                        int noteCount = (int)Math.Floor(amount / CashItems[idx]);
-                        if (noteCount <= CashItemTotals[idx])
+                        int noteCount = (int)Math.Floor(amount / item.Value);
+                        if (noteCount <= item.Total)
                         {
-                            CashItemTotals[idx] = CashItemTotals[idx] - noteCount;
-                            amount -= noteCount * CashItems[idx];
+                            item.Total -= noteCount;
+                            amount -= noteCount * item.Value;
                             amount = Math.Round(amount, 2);
                             if (sb.Length > 0)
                                 sb.Append(", ");
 
-                            sb.Append($"{CashItemsDisplay[idx]} x {noteCount}");
+                            sb.Append($"{item.Display} x {noteCount}");
                         }
                     }
-                }
+                });
 
                 return new BaseAlgorithmOutput
                 {
