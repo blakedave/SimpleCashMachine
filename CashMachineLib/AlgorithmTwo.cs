@@ -16,22 +16,22 @@ namespace CashMachineLib
         {
             if (SufficientFunds(amount))
             {
-                int idx = Array.IndexOf(CashItems, CASH_ITEM);
+                var item = Array.Find(Float, item => item.Value == CASH_ITEM);
 
-                if (amount >= CashItems[idx])
+                if (amount >= item.Value)
                 {
-                    int noteCount = (int)Math.Floor(amount / CashItems[idx]);
-                    if (noteCount > CashItemTotals[idx])
+                    int noteCount = (int)Math.Floor(amount / item.Value);
+                    if (noteCount > item.Total)
                     {
-                        noteCount = CashItemTotals[idx];
+                        noteCount = item.Total;
                     }
 
-                    CashItemTotals[idx] = CashItemTotals[idx] - noteCount;
+                    item.Total -= noteCount;
 
                     return new BaseAlgorithmOutput
                     {
                         Balance = Balance,
-                        Output = $"{CashItemsDisplay[idx]} x {noteCount}"
+                        Output = $"{item.Display} x {noteCount}"
                     };
                 }
                 else
