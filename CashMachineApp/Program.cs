@@ -10,9 +10,9 @@ namespace CashMachineApp
         {
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-GB");
 
-            AlgorithmContext context = new AlgorithmContext(culture);
+            var context = AlgorithmContext.GetInitialised<AlgorithmOne>(culture);
             
-            context.Switch<AlgorithmOne>();
+            //context.Switch<AlgorithmOne>();
             //context.Switch<AlgorithmTwo>();
 
             while (true)
@@ -29,7 +29,7 @@ namespace CashMachineApp
             }
         }
 
-        static void MakeAWithdrawl(AlgorithmContext context)
+        static void MakeAWithdrawl(IAlgorithmContext context)
         {
             Console.WriteLine("Enter amount: ");
             string input = Console.ReadLine();
