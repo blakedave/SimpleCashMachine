@@ -11,6 +11,7 @@ namespace CashMachineApp
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-GB");
 
             AlgorithmContext context = new AlgorithmContext(culture);
+            
             context.Switch<AlgorithmOne>();
             //context.Switch<AlgorithmTwo>();
 
