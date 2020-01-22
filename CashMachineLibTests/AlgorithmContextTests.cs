@@ -12,7 +12,7 @@ namespace CashMachineLibTests
         {
             var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
 
-            Assert.Equal(typeof(AlgorithmOne), context.CurrentAlgorithType);
+            Assert.Equal(typeof(AlgorithmOne), context.CurrentAlgorithmType);
         }
         
         [Fact]
@@ -21,7 +21,7 @@ namespace CashMachineLibTests
             var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
             context.Switch<AlgorithmTwo>();
 
-            Assert.Equal(typeof(AlgorithmTwo), context.CurrentAlgorithType);
+            Assert.Equal(typeof(AlgorithmTwo), context.CurrentAlgorithmType);
         }
     }
 }

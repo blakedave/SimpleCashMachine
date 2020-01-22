@@ -32,7 +32,7 @@ namespace CashMachineLib
             return CurrentAlgorithm.Withdraw(amount);
         }
 
-        public Type CurrentAlgorithType { get => CurrentAlgorithm.GetType(); }
+        public Type CurrentAlgorithmType { get => CurrentAlgorithm.GetType(); }
 
         public double Balance => CurrentAlgorithm.Balance;
     }
