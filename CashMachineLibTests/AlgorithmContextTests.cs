@@ -12,16 +12,16 @@ namespace CashMachineLibTests
         {
             var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
 
-            Assert.Equal("CashMachineLib.AlgorithmOne", context.CurrentAlgorithType.FullName);
+            Assert.Equal(typeof(AlgorithmOne), context.CurrentAlgorithType);
         }
-
+        
         [Fact]
         public void AfterSwitchCurrentAlgorithmIsAlgorithmTwo()
         {
             var context = new AlgorithmContext(CultureInfo.GetCultureInfo("en-GB"));
             context.Switch<AlgorithmTwo>();
 
-            Assert.Equal("CashMachineLib.AlgorithmTwo", context.CurrentAlgorithType.FullName);
+            Assert.Equal(typeof(AlgorithmTwo), context.CurrentAlgorithType);
         }
     }
 }
